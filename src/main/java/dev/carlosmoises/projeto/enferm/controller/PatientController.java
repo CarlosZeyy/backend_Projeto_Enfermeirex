@@ -3,15 +3,15 @@ package dev.carlosmoises.projeto.enferm.controller;
 import dev.carlosmoises.projeto.enferm.DTO.CreatePatientDTO;
 import dev.carlosmoises.projeto.enferm.DTO.PatientResponseDTO;
 import dev.carlosmoises.projeto.enferm.DTO.UpdatePatientDTO;
-import dev.carlosmoises.projeto.enferm.model.Patient;
 import dev.carlosmoises.projeto.enferm.service.PatientService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/patients")
@@ -33,10 +33,10 @@ public class PatientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PatientResponseDTO>> getAllPatients() {
-        var patients = patientService.getAllPatients();
+    public ResponseEntity<Page<PatientResponseDTO>> getAllPatients(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
+        var patientsPage = patientService.getAllPatients(pageable);
 
-        return ResponseEntity.ok(patients);
+        return ResponseEntity.ok(patientsPage);
     }
 
     @GetMapping("/{patientId}")

@@ -1,6 +1,7 @@
 package dev.carlosmoises.projeto.enferm.controller;
 
 import dev.carlosmoises.projeto.enferm.DTO.GlobalExceptionHandlerDTO;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,5 +26,10 @@ public class ExceptionController {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ResponseMessage> handleBusinessLogicException(RuntimeException ex) {
         return ResponseEntity.badRequest().body(new ResponseMessage(ex.getMessage()));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ResponseMessage> handleIntegrityViolation() {
+        return ResponseEntity.badRequest().body(new ResponseMessage("Não é possivel excluir esse paciente, pois ele já possui agendamentos vinculados ao sistema."));
     }
 };

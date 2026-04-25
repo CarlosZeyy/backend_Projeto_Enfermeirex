@@ -6,10 +6,9 @@ import dev.carlosmoises.projeto.enferm.DTO.UpdatePatientDTO;
 import dev.carlosmoises.projeto.enferm.model.Patient;
 import dev.carlosmoises.projeto.enferm.repository.PatientRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PatientService {
@@ -27,14 +26,8 @@ public class PatientService {
         return patientSaved.getPatientId();
     }
 
-    public List<PatientResponseDTO> getAllPatients() {
-        return patientRepository.findAll().stream().map(patient -> new PatientResponseDTO(
-                patient.getPatientId(),
-                patient.getName(),
-                patient.getPhone(),
-                patient.getAddress(),
-                patient.getObs()
-        )).toList();
+    public Page<PatientResponseDTO> getAllPatients(Pageable pageable) {
+        return patientRepository.findAll(pageable).map(PatientResponseDTO::new);
     }
 
     public PatientResponseDTO getPatientById(Long id) {
