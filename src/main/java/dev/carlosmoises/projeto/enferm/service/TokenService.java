@@ -23,4 +23,19 @@ public class TokenService {
                 .withExpiresAt(tokenExpired)
                 .sign(algorithm);
     }
+
+    public String getSubject(String tokenJWT) {
+        try {
+
+            Algorithm algorithm = Algorithm.HMAC256(System.getenv("PASSWORD_SECRET"));
+
+            return JWT.require(algorithm)
+                    .withIssuer("API Enfermagem")
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
+        } catch (Exception exception) {
+            throw new RuntimeException("Token JWT inválido ou expirado");
+        }
+    }
 }
