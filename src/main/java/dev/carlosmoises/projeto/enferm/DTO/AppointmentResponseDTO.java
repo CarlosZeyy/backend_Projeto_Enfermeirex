@@ -4,5 +4,6 @@ import dev.carlosmoises.projeto.enferm.model.StatusAppointment;
 
 import java.time.LocalDateTime;
 
-public record AppointmentResponseDTO(Long appointmentId,Long patientId, LocalDateTime data, StatusAppointment status) {
+public record AppointmentResponseDTO(Long appointmentId, Long patientId, String patientName, LocalDateTime data,
+                                     StatusAppointment status) {
 }

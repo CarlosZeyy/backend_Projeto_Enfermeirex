@@ -7,9 +7,7 @@ import dev.carlosmoises.projeto.enferm.model.Appointment;
 import dev.carlosmoises.projeto.enferm.model.StatusAppointment;
 import dev.carlosmoises.projeto.enferm.repository.AppointmentRepository;
 import dev.carlosmoises.projeto.enferm.repository.PatientRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -44,6 +42,7 @@ public class AppointmentService {
         return appointmentRepository.findAll().stream().map(appointment -> new AppointmentResponseDTO(
                 appointment.getAppointmentId(),
                 appointment.getPatient().getPatientId(),
+                appointment.getPatient().getName(),
                 appointment.getData(),
                 appointment.getStatus()
         )).toList();
@@ -55,6 +54,7 @@ public class AppointmentService {
         return new AppointmentResponseDTO(
                 appointment.getAppointmentId(),
                 appointment.getPatient().getPatientId(),
+                appointment.getPatient().getName(),
                 appointment.getData(),
                 appointment.getStatus()
         );
@@ -65,6 +65,7 @@ public class AppointmentService {
                 appointment -> new AppointmentResponseDTO(
                         appointment.getAppointmentId(),
                         appointment.getPatient().getPatientId(),
+                        appointment.getPatient().getName(),
                         appointment.getData(),
                         appointment.getStatus()
                 )).toList();
@@ -89,6 +90,7 @@ public class AppointmentService {
         return new AppointmentResponseDTO(
                 appointment.getAppointmentId(),
                 appointment.getPatient().getPatientId(),
+                appointment.getPatient().getName(),
                 appointment.getData(),
                 appointment.getStatus()
         );
