@@ -41,7 +41,7 @@ public class AppointmentService {
     public List<AppointmentResponseDTO> getAllAppointments() {
         return appointmentRepository.findAll().stream().map(appointment -> new AppointmentResponseDTO(
                 appointment.getAppointmentId(),
-                appointment.getPatient().getPatientId(),
+                appointment.getPatient().getId(),
                 appointment.getPatient().getName(),
                 appointment.getData(),
                 appointment.getStatus()
@@ -53,7 +53,7 @@ public class AppointmentService {
 
         return new AppointmentResponseDTO(
                 appointment.getAppointmentId(),
-                appointment.getPatient().getPatientId(),
+                appointment.getPatient().getId(),
                 appointment.getPatient().getName(),
                 appointment.getData(),
                 appointment.getStatus()
@@ -61,10 +61,10 @@ public class AppointmentService {
     }
 
     public List<AppointmentResponseDTO> getAppointmentsByPatientId(Long patientId) {
-        return appointmentRepository.findByPatientPatientId(patientId).stream().map(
+        return appointmentRepository.findByPatientId(patientId).stream().map(
                 appointment -> new AppointmentResponseDTO(
                         appointment.getAppointmentId(),
-                        appointment.getPatient().getPatientId(),
+                        appointment.getPatient().getId(),
                         appointment.getPatient().getName(),
                         appointment.getData(),
                         appointment.getStatus()
@@ -89,7 +89,7 @@ public class AppointmentService {
 
         return new AppointmentResponseDTO(
                 appointment.getAppointmentId(),
-                appointment.getPatient().getPatientId(),
+                appointment.getPatient().getId(),
                 appointment.getPatient().getName(),
                 appointment.getData(),
                 appointment.getStatus()

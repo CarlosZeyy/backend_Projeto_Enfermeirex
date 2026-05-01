@@ -19,11 +19,11 @@ public class PatientService {
     }
 
     public Long createPatient(CreatePatientDTO createPatientDTO) {
-        var patient = new Patient(null, createPatientDTO.name(), createPatientDTO.phone(), createPatientDTO.address(), createPatientDTO.obs());
+        var patient = new Patient(null, createPatientDTO.name(), createPatientDTO.phone(), createPatientDTO.address(), createPatientDTO.obs(), null);
 
         var patientSaved = patientRepository.save(patient);
 
-        return patientSaved.getPatientId();
+        return patientSaved.getId();
     }
 
     public Page<PatientResponseDTO> getAllPatients(Pageable pageable) {
@@ -34,7 +34,7 @@ public class PatientService {
         var patient = patientRepository.findById(id).orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
         return new PatientResponseDTO(
-                patient.getPatientId(),
+                patient.getId(),
                 patient.getName(),
                 patient.getPhone(),
                 patient.getAddress(),
@@ -65,7 +65,7 @@ public class PatientService {
         patientRepository.save(patient);
 
         return new PatientResponseDTO(
-                patient.getPatientId(),
+                patient.getId(),
                 patient.getName(),
                 patient.getPhone(),
                 patient.getAddress(),

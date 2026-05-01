@@ -9,5 +9,5 @@ import java.util.List;
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     boolean existsByData(LocalDateTime data);
 
-    List<Appointment> findByPatientPatientId(Long patientId);
+    List<Appointment> findByPatientId(Long patientId);
 }
