@@ -27,7 +27,7 @@ public class MedicationService {
 
         medication.setPatient(patient);
         medication.setMedicationName(createMedicationDTO.medicationName());
-        medication.setMedicationDosage(createMedicationDTO.MedicationDosage());
+        medication.setMedicationDosage(createMedicationDTO.medicationDosage());
 
         var medicationSaved = medicationRepository.save(medication);
 
