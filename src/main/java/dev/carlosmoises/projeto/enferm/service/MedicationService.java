@@ -2,7 +2,6 @@ package dev.carlosmoises.projeto.enferm.service;
 
 import dev.carlosmoises.projeto.enferm.DTO.CreateMedicationDTO;
 import dev.carlosmoises.projeto.enferm.DTO.MedicationResponseDTO;
-import dev.carlosmoises.projeto.enferm.DTO.UpdateMedicationDTO;
 import dev.carlosmoises.projeto.enferm.model.Medication;
 import dev.carlosmoises.projeto.enferm.repository.MedicationRepository;
 import dev.carlosmoises.projeto.enferm.repository.PatientRepository;
@@ -43,27 +42,6 @@ public class MedicationService {
                         medication.getMedicationDosage()
                 )
         ).toList();
-    }
-
-    public MedicationResponseDTO updateMedication(Long id, UpdateMedicationDTO updateMedicationDTO) {
-        var medication = medicationRepository.findById(id).orElseThrow(() -> new RuntimeException("Medicamento não encontrado"));
-
-        if (updateMedicationDTO.medicationName() != null) {
-            medication.setMedicationName(updateMedicationDTO.medicationName());
-        }
-
-        if (updateMedicationDTO.medicationDosage() != null) {
-            medication.setMedicationDosage(updateMedicationDTO.medicationDosage());
-        }
-
-        medicationRepository.save(medication);
-
-        return new MedicationResponseDTO(
-                medication.getMedicationId(),
-                medication.getPatient().getId(),
-                medication.getMedicationName(),
-                medication.getMedicationDosage()
-        );
     }
 
     public void deleteMedicationById(Long id) {

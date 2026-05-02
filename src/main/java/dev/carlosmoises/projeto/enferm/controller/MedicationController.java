@@ -2,7 +2,6 @@ package dev.carlosmoises.projeto.enferm.controller;
 
 import dev.carlosmoises.projeto.enferm.DTO.CreateMedicationDTO;
 import dev.carlosmoises.projeto.enferm.DTO.MedicationResponseDTO;
-import dev.carlosmoises.projeto.enferm.DTO.UpdateMedicationDTO;
 import dev.carlosmoises.projeto.enferm.service.MedicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,13 +32,6 @@ public class MedicationController {
         var medications = medicationService.getPatientMedicationById(patientId);
 
         return ResponseEntity.ok(medications);
-    }
-
-    @PutMapping("/{medicationId}")
-    public ResponseEntity<MedicationResponseDTO> updateMedication(@PathVariable("medicationId") Long id, @RequestBody UpdateMedicationDTO updateMedicationDTO) {
-        var updateMedication = medicationService.updateMedication(id, updateMedicationDTO);
-
-        return ResponseEntity.ok(updateMedication);
     }
 
     @DeleteMapping("/{medicationId}")
