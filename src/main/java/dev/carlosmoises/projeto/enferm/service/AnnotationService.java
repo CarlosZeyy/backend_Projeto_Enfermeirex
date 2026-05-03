@@ -33,7 +33,7 @@ public class AnnotationService {
     }
 
     public List<AnnotationResponseDTO> getPatientAnnotations(Long patientId) {
-        return annotationRepository.findByPatientId(patientId).stream().map(
+        return annotationRepository.findByOrderByCreatedAtDesc(patientId).stream().map(
                 (annotation -> new AnnotationResponseDTO(
                         annotation.getAnnotationId(),
                         annotation.getPatient().getId(),
